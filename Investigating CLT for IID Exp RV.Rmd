@@ -9,11 +9,11 @@ library(dplyr)
 library(ggplot2)
 ```
 
-## Overview
+# Overview
 
 This report studies if a set of 40 independent and identically distributed exponential random variables, with parameter $\lambda=0.2$, behave according to the Central Limit Theorem. To perform this analysis, we will simulate random samples from the assumed distribution and then check how the means of those samples are distributed-in particular, their normality.
 
-## Simulations
+# Simulations
 
 We begin by obtaining 40 random exponentials from a distribution with parameter $\lambda$=0.2. We run this simulation 5000 times and then calculate the mean of each simulation.
 
@@ -30,14 +30,14 @@ The results are stored in a variable `exp_means`. Note that the samples we obtai
 source("sample data plot.R", local=knitr::knit_global())
 ```
 
-## Central Limit Theorem
+# Central Limit Theorem
 
 The theorem states that the mean of set of IID random variables is approximately normally distributed, and that this approximation gets better with increasing sample sizes.
 $$ \frac{\bar{X}-\mu}{\tfrac{\sigma}{\sqrt{n}}} \sim N(0,1) $$
 This implies that for our sample of a set of 40 $Exp(0.2)$ variables, we have that,
 $$ \frac{\bar{X}-5}{\tfrac{5}{\sqrt{40}}} \sim N(0,1) $$
 
-## Observed sample means
+# Observed sample means
 
 As can be seen from the plot, the distribution of sample means is approximately normal. The blue curve is the density of a $N(5,\tfrac{5}{\sqrt{40}})$ variable.
 
@@ -45,16 +45,20 @@ As can be seen from the plot, the distribution of sample means is approximately 
 source("sample means plot.R", local=knitr::knit_global())
 ```
 
-The mean of the simulated distribution and that of the normal distribution are extremely close. The difference is `r label="mean diff"`%.
+The mean of the simulated distribution and that of the theoretical distribution are extremely close. The difference is `r label="mean diff"`%.
 
 ```{r mean diff}
 abs((5-mean(exp_means)))*100/5
 ```
 
-The standard deviation of the simulated distribution is also pretty close to the true population standard deviation. The difference is `r label=sd diff`%.
+The standard deviation of the simulated distribution is also pretty close to the theoretical standard deviation. The difference is `r ref.label="sd diff"`%.
 
 ```{r sd diff}
 abs((5/sqrt(40)-sd(exp_means)))*100/5
 ```
 
-##
+# Conclusion
+
+We randomly simulated numerous sets of IID exponential random variables and plotted the density of their means on a histogram. We saw that the distribution was very close to a normal distribution with the appropriate parameters.
+Thus, we were successful in confirming the validity of the Central Limit Theorem for this particular exponential distribution.
+
