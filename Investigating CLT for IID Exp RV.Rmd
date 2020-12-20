@@ -9,3 +9,12 @@ output: pdf_document
 
 This report studies if a set of 40 independent and identically distributed exponential random variables, with parameter $\lambda=0.2$, behave according to the Central Limit Theorem. To perform this analysis, we will simulate random samples from the assumed distribution and then check how the means of those samples are distributed-in particular, their normality.
 
+## Simulations
+
+We begin by obtaining 40 random exponentials from a distribution with parameter $\lambda$=0.2. We run this simulation 5000 times and then calculate the mean of each simulation.
+
+```{r getting means}
+exp_means<-sapply(1:5000, function(i) mean(rexp(40,0.2)))
+```
+
+The results are stored in a variable `exp_means`.
