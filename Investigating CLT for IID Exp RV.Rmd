@@ -5,7 +5,6 @@ output: pdf_document
 ---
 
 ```{r setup, echo=F, message=F}
-library(dplyr)
 library(ggplot2)
 ```
 
@@ -62,3 +61,46 @@ abs((5/sqrt(40)-sd(exp_means)))*100/5
 We randomly simulated numerous sets of IID exponential random variables and plotted the density of their means on a histogram. We saw that the distribution was very close to a normal distribution with the appropriate parameters.
 Thus, we were successful in confirming the validity of the Central Limit Theorem for this particular exponential distribution.
 
+# Appendix
+
+## Load `ggplot2` package
+```{r setup, eval=F}
+```
+
+## Seed for getting means
+A seed was set for simulating the exponential variables. This was used again in extracting the first simulation to plot the sample data
+```{r seed, eval=F}
+```
+
+## Sample data plot
+```{r, eval=F}
+set.seed(137)
+
+sample<-rexp(40,0.2)
+
+x<-seq(min(sample),max(sample),length.out=100)
+
+p<-ggplot(as.data.frame(sample), aes(x=sample, y=..density..)) + 
+  geom_histogram(binwidth=2) + 
+  geom_vline(xintercept=mean(sample), colour="black", linetype="dotdash")
+
+p<-p + geom_line(data=data.frame(x=x, y=dexp(x,0.2)), aes(x=x, y=y), colour="red") +
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
+  geom_vline(xintercept=5, colour="red", linetype="dashed")+
+  annotate(geom="label", x=c(mean(sample)-1.75,7.05), y=c(0.12,0.15),
+           label=c("sample mean", "population mean"))
+
+print(p)
+```
+
+## Sample means plot
+```{r, eval=F}
+q<-ggplot(as.data.frame(exp_means), aes(x=exp_means, y=..density..)) +
+  geom_histogram(binwidth=0.15) +
+  labs(x="Means of 40 Exponential Random Variables", y="Density")
+
+q<-q + geom_line(data=data.frame(x=exp_means ,y=dnorm(exp_means,5,5/sqrt(40))),
+                 aes(x, y), col="blue")
+
+print(q)
+```
