@@ -1,0 +1,28 @@
+---
+title: "Investigating CLT for IID Exponential Random Variables"
+author: "Aseem Rohatgi"
+date: "20/12/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+This report studies if a set of 40 independent and identically distributed exponential random variables, with parameter /lambda=0.2, behave according to the Central Limit Theorem. To perform this analysis, we will simulate random samples from the assumed distribution and then check how the means of those samples are distributed-in particular, their normality.
+
+
+
+
+
+
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
