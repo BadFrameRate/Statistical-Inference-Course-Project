@@ -27,7 +27,7 @@ exp_means<-sapply(1:5000, function(i) mean(rexp(40,0.2)))
 The results are stored in a variable `exp_means`. Note that the samples we obtain, will be approximately exponential. The plot shows the histogram of one such sample, along with the parent distribution density.
 
 ```{r sample data plot, echo=F}
-source("sample data plot.R")
+source("sample data plot.R", local=knitr::knit_global())
 ```
 
 ## Central Limit Theorem
@@ -39,5 +39,22 @@ $$ \frac{\bar{X}-5}{\tfrac{5}{\sqrt{40}}} \sim N(0,1) $$
 
 ## Observed sample means
 
+As can be seen from the plot, the distribution of sample means is approximately normal. The blue curve is the density of a $N(5,\tfrac{5}{\sqrt{40}})$ variable.
 
-### Distribution
+```{r sample means plot, echo=F}
+source("sample means plot.R", local=knitr::knit_global())
+```
+
+The mean of the simulated distribution and that of the normal distribution are extremely close. The difference is `r label="mean diff"`%.
+
+```{r mean diff}
+abs((5-mean(exp_means)))*100/5
+```
+
+The standard deviation of the simulated distribution is also pretty close to the true population standard deviation. The difference is `r label=sd diff`%.
+
+```{r sd diff}
+abs((5/sqrt(40)-sd(exp_means)))*100/5
+```
+
+##
