@@ -1,5 +1,3 @@
-set.seed(137)
-
 q<-ggplot(as.data.frame(exp_means), aes(x=exp_means, y=..density..)) +
   geom_histogram(binwidth=0.15) +
   labs(x="Means of 40 Exponential Random Variables", y="Density")
