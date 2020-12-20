@@ -5,11 +5,7 @@ date: "20/12/2020"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## Overview
 
-This report studies if a set of 40 independent and identically distributed exponential random variables, with parameter /lambda=0.2, behave according to the Central Limit Theorem. To perform this analysis, we will simulate random samples from the assumed distribution and then check how the means of those samples are distributed-in particular, their normality.
+This report studies if a set of 40 independent and identically distributed exponential random variables, with parameter $\lambda=0.2$, behave according to the Central Limit Theorem. To perform this analysis, we will simulate random samples from the assumed distribution and then check how the means of those samples are distributed-in particular, their normality.
 
