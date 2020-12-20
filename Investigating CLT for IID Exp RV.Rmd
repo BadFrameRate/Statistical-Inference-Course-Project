@@ -18,6 +18,9 @@ This report studies if a set of 40 independent and identically distributed expon
 
 We begin by obtaining 40 random exponentials from a distribution with parameter $\lambda$=0.2. We run this simulation 5000 times and then calculate the mean of each simulation.
 
+```{r seed, echo=F}
+set.seed(137)
+```
 ```{r getting means}
 exp_means<-sapply(1:5000, function(i) mean(rexp(40,0.2)))
 ```
@@ -25,13 +28,25 @@ exp_means<-sapply(1:5000, function(i) mean(rexp(40,0.2)))
 The results are stored in a variable `exp_means`. Note that the samples we obtain, will be approximately exponential. The plot shows the histogram of one such sample, along with the parent distribution density.
 
 ```{r sample data plot, echo=F, fig.width=5, fig.height=4}
+set.seed(137)
 sample<-rexp(40,0.2)
 x=seq(min(sample),max(sample),length.out=100)
 p<-ggplot(as.data.frame(sample), aes(x=sample, y=..density..)) + 
-  geom_histogram(binwidth=2)
-p + geom_line(data=data.frame(x=x, y=dexp(x,0.2)), aes(x=x, y=y), color="red") +
-  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())
+  geom_histogram(binwidth=2) + 
+  geom_vline(xintercept=mean(sample), colour="black", linetype="dotdash")
+p + geom_line(data=data.frame(x=x, y=dexp(x,0.2)), aes(x=x, y=y), colour="red") +
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
+  geom_vline(xintercept=5, colour="red", linetype="dashed")
 ```
 
+## Central Limit Theorem
 
-### 
+The theorem states that the mean of set of IID random variables is approximately normally distributed, and that this approximation gets better with increasing sample sizes.
+$$ \frac{\bar{X}-\mu}{\tfrac{\sigma}{\sqrt{n}}} \sim N(0,1) $$
+This implies that for our sample of a set of 40 $Exp(0.2)$ variables, we have that,
+$$ \frac{\bar{X}-5}{\tfrac{5}{\sqrt{40}}} \sim N(0,1) $$
+
+## Observed sample means
+
+
+### Distribution
