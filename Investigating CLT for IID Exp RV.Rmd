@@ -5,7 +5,7 @@ date: "20/12/2020"
 output: pdf_document
 ---
 
-```{r setup, echo=F}
+```{r setup, echo=F, message=F}
 library(dplyr)
 library(ggplot2)
 ```
@@ -22,4 +22,16 @@ We begin by obtaining 40 random exponentials from a distribution with parameter 
 exp_means<-sapply(1:5000, function(i) mean(rexp(40,0.2)))
 ```
 
-The results are stored in a variable `exp_means`.
+The results are stored in a variable `exp_means`. Note that the samples we obtain, will be approximately exponential. The plot shows the histogram of one such sample, along with the parent distribution density.
+
+```{r sample data plot, echo=F, fig.width=5, fig.height=4}
+sample<-rexp(40,0.2)
+x=seq(min(sample),max(sample),length.out=100)
+p<-ggplot(as.data.frame(sample), aes(x=sample, y=..density..)) + 
+  geom_histogram(binwidth=2)
+p + geom_line(data=data.frame(x=x, y=dexp(x,0.2)), aes(x=x, y=y), color="red") +
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())
+```
+
+
+### 
