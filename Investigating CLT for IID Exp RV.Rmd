@@ -1,7 +1,6 @@
 ---
 title: "Investigating CLT for IID Exponential Random Variables"
 author: "Aseem Rohatgi"
-date: "20/12/2020"
 output: pdf_document
 ---
 
@@ -27,16 +26,8 @@ exp_means<-sapply(1:5000, function(i) mean(rexp(40,0.2)))
 
 The results are stored in a variable `exp_means`. Note that the samples we obtain, will be approximately exponential. The plot shows the histogram of one such sample, along with the parent distribution density.
 
-```{r sample data plot, echo=F, fig.width=5, fig.height=4}
-set.seed(137)
-sample<-rexp(40,0.2)
-x=seq(min(sample),max(sample),length.out=100)
-p<-ggplot(as.data.frame(sample), aes(x=sample, y=..density..)) + 
-  geom_histogram(binwidth=2) + 
-  geom_vline(xintercept=mean(sample), colour="black", linetype="dotdash")
-p + geom_line(data=data.frame(x=x, y=dexp(x,0.2)), aes(x=x, y=y), colour="red") +
-  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
-  geom_vline(xintercept=5, colour="red", linetype="dashed")
+```{r sample data plot, echo=F}
+source("sample data plot.R")
 ```
 
 ## Central Limit Theorem
