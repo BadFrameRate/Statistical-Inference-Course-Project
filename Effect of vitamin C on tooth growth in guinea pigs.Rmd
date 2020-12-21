@@ -43,3 +43,22 @@ Plotting boxplots for the different dosages in the two delivery methods would al
 ToothGrowth %>% ggplot(aes(factor(dose), len, fill=supp)) + geom_boxplot()
 ```
 
+# Is there a difference in tooth growth among the two delivery methods?
+
+We will consider each dosage level separately and see if there is a difference between the results of the two delivery methods using an unpaired t-test. We use an unpaired test since the documentation states that "Each animal received one of three dose levels of vitamin C by one of two delivery methods". So the data are not paired, and each observation comes from a different guinea pig.
+
+## Dosage of 0.5 mg/day
+
+Our null hypothesis is that there is no difference between the mean growth in length by the two delivery methods. Our alternative hypothesis states that there is such a difference.
+
+A simple `t.test` command will give us required results.
+
+```{r dose 0.5, echo=F}
+OJ_0.5<-ToothGrowth %>% filter(dose==0.5, supp=="OJ") %>% select(len)
+VC_0.5<-ToothGrowth %>% filter(dose==0.5, supp=="VC") %>% select(len)
+t.test(OJ_0.5, VC_0.5, paired=F)
+```
+
+The p-value is `r t.test(OJ_0.5, VC_0.5, paired=F)$p.value`. Since this is much less than 0.05, we can reject our null hypothesis at 95% significance.
+
+##
