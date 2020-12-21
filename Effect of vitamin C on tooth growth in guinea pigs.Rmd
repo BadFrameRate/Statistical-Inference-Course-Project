@@ -1,0 +1,45 @@
+---
+title: "The Effect of Vitamin C on Tooth Growth in Guinea Pigs"
+author: "Aseem Rohatgi"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+# The Data
+
+The dataset we'll be using comes pre-built in R. It's stored as a data frame under the name `ToothGrowth`. The documentation for this dataset tells us that it is a collection of three variables-one response variable stating the length of odontoblasts in 60 guinea pigs, and two explanatory variables-one representing the method of delivery of vitamin C, and the other representing the dosage. First we look at its structure.
+
+```{r structure}
+str(ToothGrowth)
+```
+
+We see that the variable `dose`, which represent the three levels of dosage is stored as a numeric variable. We should keep this in mind if we are to use it as a factor later on in our analysis.
+We should also check how the sample sizes of these groups differ.
+
+```{r sample size}
+ToothGrowth %>% count(supp, dose)
+```
+
+The sample sizes are all the same, albeit small. Let's now look at some basic summary statistics for this data set, with and without grouping.
+
+```{r summary EDA, echo=F}
+ToothGrowth %>% group_by(dose, supp) %>%
+  summarise(quartile1=quantile(len,0.25), median=median(len),
+            quartile2=quantile(len,0.75), iqr= IQR(len), mean=mean(len), 
+            .groups="drop")
+
+ToothGrowth %>% 
+  summarise(quartile1=quantile(len,0.25), median=median(len),
+            quartile2=quantile(len,0.75), iqr= IQR(len), mean=mean(len))
+```
+
+Plotting boxplots for the different dosages in the two delivery methods would allow us to understand this data better.
+
+```{r boxplot EDA, echo=F}
+ToothGrowth %>% ggplot(aes(factor(dose), len, fill=supp)) + geom_boxplot()
+```
+
