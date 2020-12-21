@@ -50,7 +50,6 @@ source("sample means plot.R", local=knitr::knit_global())
 
 ```{r mean diff %, echo=F, results='hide'}
 meandiff<-abs((5-mean(exp_means)))*100/5
-meandiff
 ```
 
 The mean of the simulated distribution and that of the theoretical distribution are extremely close. The difference is `r meandiff`% of the theoretical value.
@@ -61,7 +60,6 @@ The mean of the simulated distribution and that of the theoretical distribution 
 
 ```{r sd diff %,echo=F, results='hide'}
 sddiff<-abs((5/sqrt(40)-sd(exp_means)))*100/5
-sddiff
 ```
 
 The standard deviation of the simulated distribution is also pretty close to the theoretical standard deviation. The difference is `r sddiff`% of the theoretical value.
