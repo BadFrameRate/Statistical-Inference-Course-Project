@@ -53,7 +53,7 @@ meandiff<-abs((5-mean(exp_means)))*100/5
 meandiff
 ```
 
-The mean of the simulated distribution and that of the theoretical distribution are extremely close. The difference is `r meandiff`%.
+The mean of the simulated distribution and that of the theoretical distribution are extremely close. The difference is `r meandiff`% of the theoretical value.
 
 ```{r sd diff,}
 5/sqrt(40); sd(exp_means)
@@ -64,7 +64,7 @@ sddiff<-abs((5/sqrt(40)-sd(exp_means)))*100/5
 sddiff
 ```
 
-The standard deviation of the simulated distribution is also pretty close to the theoretical standard deviation. The difference is `r sddiff`%.
+The standard deviation of the simulated distribution is also pretty close to the theoretical standard deviation. The difference is `r sddiff`% of the theoretical value.
 
 # Conclusion
 
@@ -113,4 +113,12 @@ q<-q + geom_line(data=data.frame(x=exp_means ,y=dnorm(exp_means,5,5/sqrt(40))),
                  aes(x, y), col="blue")
 
 print(q)
+```
+
+## Sample mean vs theoretical mean
+```{r mean diff %, eval=F}
+```
+
+## Sample standard deviation vs theoretical standard deviation
+```{r sd diff %, eval=F}
 ```
