@@ -59,6 +59,32 @@ VC_0.5<-ToothGrowth %>% filter(dose==0.5, supp=="VC") %>% select(len)
 t.test(OJ_0.5, VC_0.5, paired=F)
 ```
 
-The p-value is `r t.test(OJ_0.5, VC_0.5, paired=F)$p.value`. Since this is much less than 0.05, we can reject our null hypothesis at 95% significance.
+The p-value is `r t.test(OJ_0.5, VC_0.5, paired=F)$p.value`. Since this is much less than 0.05, we reject our null hypothesis at 95% significance.
 
-##
+## Dosage of 1 mg/day
+
+Our null hypothesis is that there is no difference between the mean growth in length by the two delivery methods. Our alternative hypothesis states that there is such a difference.
+
+A simple `t.test` command will give us required results.
+
+```{r dose 1, echo=F}
+OJ_1<-ToothGrowth %>% filter(dose==1, supp=="OJ") %>% select(len)
+VC_1<-ToothGrowth %>% filter(dose==1, supp=="VC") %>% select(len)
+t.test(OJ_1, VC_1, paired=F)
+```
+
+The p-value is `r t.test(OJ_1, VC_1, paired=F)$p.value`. Since this is much less than 0.05, we reject our null hypothesis at 95% significance.
+
+## Dosage of 2 mg/day
+
+Our null hypothesis is that there is no difference between the mean growth in length by the two delivery methods. Our alternative hypothesis states that there is such a difference.
+
+A simple `t.test` command will give us required results.
+
+```{r dose 2, echo=F}
+OJ_2<-ToothGrowth %>% filter(dose==2, supp=="OJ") %>% select(len)
+VC_2<-ToothGrowth %>% filter(dose==2, supp=="VC") %>% select(len)
+t.test(OJ_2, VC_2, paired=F)
+```
+
+The p-value is `r t.test(OJ_2, VC_2, paired=F)$p.value`. Since this is much greater than 0.05, we do not sufficient evidence to reject our null hypothesis at 95% significance.
