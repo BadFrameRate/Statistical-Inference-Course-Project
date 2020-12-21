@@ -43,18 +43,19 @@ As can be seen from the plot, the distribution of sample means is approximately 
 ```{r sample means plot, echo=F}
 source("sample means plot.R", local=knitr::knit_global())
 ```
-
-The mean of the simulated distribution and that of the theoretical distribution are extremely close. The difference is `r label="mean diff"`%.
-
 ```{r mean diff}
-abs((5-mean(exp_means)))*100/5
+meandiff<-abs((5-mean(exp_means)))*100/5
+meandiff
 ```
 
-The standard deviation of the simulated distribution is also pretty close to the theoretical standard deviation. The difference is `r ref.label="sd diff"`%.
+The mean of the simulated distribution and that of the theoretical distribution are extremely close. The difference is `r meandiff`%.
 
 ```{r sd diff}
-abs((5/sqrt(40)-sd(exp_means)))*100/5
+sddiff<-abs((5/sqrt(40)-sd(exp_means)))*100/5
+sddiff
 ```
+
+The standard deviation of the simulated distribution is also pretty close to the theoretical standard deviation. The difference is `r sddiff`%.
 
 # Conclusion
 
