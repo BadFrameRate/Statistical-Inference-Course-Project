@@ -45,11 +45,15 @@ ToothGrowth %>% ggplot(aes(factor(dose), len, fill=supp)) + geom_boxplot()
 
 # Is there a difference in tooth growth among the two delivery methods?
 
-We will consider each dosage level separately and see if there is a difference between the results of the two delivery methods using an unpaired t-test. We use an unpaired test since the documentation states that "Each animal received one of three dose levels of vitamin C by one of two delivery methods". So the data are not paired, and each observation comes from a different guinea pig.
+We will consider each dosage level separately and see if there is a difference between the results of the two delivery methods using an unpaired t-test. We use an unpaired t-test since the documentation states that "Each animal received one of three dose levels of vitamin C by one of two delivery methods". So the data are not paired, and each observation comes from a different guinea pig, the numbers of which are quite small in our sample.
 
 ## Dosage of 0.5 mg/day
 
-Our null hypothesis is that there is no difference between the mean growth in length by the two delivery methods. Our alternative hypothesis states that there is such a difference.
+### Hypotheses
+
+Our null hypothesis is that there is no difference between the mean growth in length of odontoblasts in guinea pigs by the two delivery methods with a dosage of 0.5 mg/day. Our alternative hypothesis states that such a difference exists.
+
+### Test
 
 A simple `t.test` command will give us required results.
 
@@ -61,9 +65,17 @@ t.test(OJ_0.5, VC_0.5, paired=F)
 
 The p-value is `r t.test(OJ_0.5, VC_0.5, paired=F)$p.value`. Since this is much less than 0.05, we reject our null hypothesis at 95% significance.
 
+### Conclusion
+
+We can conclude that orange juice seems to be better than ascorbic acid in inducing growth of odontoblasts in guinea pigs when given a dosage of 0.5 mg/day.
+
 ## Dosage of 1 mg/day
 
-Our null hypothesis is that there is no difference between the mean growth in length by the two delivery methods. Our alternative hypothesis states that there is such a difference.
+### Hypotheses
+
+Our null hypothesis is that there is no difference between the mean growth in length of odontoblasts in guinea pigs by the two delivery methods with a dosage of 1 mg/day. Our alternative hypothesis states that such a difference exists.
+
+### Test
 
 A simple `t.test` command will give us required results.
 
@@ -75,9 +87,17 @@ t.test(OJ_1, VC_1, paired=F)
 
 The p-value is `r t.test(OJ_1, VC_1, paired=F)$p.value`. Since this is much less than 0.05, we reject our null hypothesis at 95% significance.
 
+### Conclusion
+
+We can conclude that orange juice seems to be better than ascorbic acid in inducing growth of odontoblasts in guinea pigs when given a dosage of 1 mg/day.
+
 ## Dosage of 2 mg/day
 
-Our null hypothesis is that there is no difference between the mean growth in length by the two delivery methods. Our alternative hypothesis states that there is such a difference.
+### Hypotheses
+
+Our null hypothesis is that there is no difference between the mean growth in length of odontoblasts in guinea pigs by the two delivery methods with a dosage of 2 mg/day. Our alternative hypothesis states that such a difference exists.
+
+### Test
 
 A simple `t.test` command will give us required results.
 
@@ -88,3 +108,25 @@ t.test(OJ_2, VC_2, paired=F)
 ```
 
 The p-value is `r t.test(OJ_2, VC_2, paired=F)$p.value`. Since this is much greater than 0.05, we do not sufficient evidence to reject our null hypothesis at 95% significance.
+
+### Conclusion
+
+We can conclude that orange juice seems to be no better than ascorbic acid in inducing growth of odontoblasts in guinea pigs when given a dosage of 2 mg/day.
+
+
+## Conclusion
+
+The tests indicate that at lower dosages, orange juice seems to be acting better than ascorbic acid in increasing the length of odontoblasts. However, this difference in their impact on mean growth of odontoblasts diminishes as dosage increases to 2 mg/day.
+
+Also, notice that the confidence interval for the difference in mean growth under a dose of 0.5 mg/day is wider and "lower in value", compared to that under a dose of 1 mg/day. But increasing the dose to 2 mg/day results in both delivery methods becoming equivalent. This suggests that there must an optimal dosage between 1 and 2 mg/day where the difference in mean growth is highest, and we might want to investigate this further.
+
+
+# Assumptions
+
+We assume that our response variable, `len`, is Gaussian. This is a reasonable assumption to make as can be seen from the  normal Q-Q plot below.
+
+```{r q-q plot, echo=F}
+qqnorm(ToothGrowth$len)
+```
+
+The observation can be assumed to be independent as well, as long as the guinea pigs used for the study were genetically diverse. Since we have no reason to believe that the guinea pigs belonged to the same family, we can be safe with our assumption of independence and hence, of a simple random sample.
